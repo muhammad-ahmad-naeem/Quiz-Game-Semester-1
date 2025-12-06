@@ -2,7 +2,7 @@
 # Quiz Game - Semester 1 Project
 
 ## Team Members:
-- Ahmad Naeem (Lead)
+- Ahmad Naeem 
 - Ahmad Raza  
 - Muhammad Rayyan
 
