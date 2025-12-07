@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 void displayMainMenu() {
     cout << "=== QUIZ GAME ===" << endl;
     cout << "1. Start Quiz" << endl;
