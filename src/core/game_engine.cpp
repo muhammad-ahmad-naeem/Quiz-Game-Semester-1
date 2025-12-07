@@ -1,5 +1,4 @@
 // Game Engine - By Ahmad Naeem
-// Game Engine - By Ahmad Naeem
 #include <iostream>
 #include <string>
 using namespace std;
