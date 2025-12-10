@@ -83,21 +83,29 @@ void submenue()
 }
 void Sciencequestions()
 {
-	struct Question {
+	struct Question
+	{
 		string q;
 		string options[4];
 		int answer;
 	};
 
-	ifstream sq("science.txt");  
-	if (!sq) {
+	ifstream sq("science.txt");
+	if (!sq)
+	{
 		cout << "File not found!" << endl;
 		return;
 	}
 	int totalQuestions = 0;
 	string line;
 	while (getline(sq, line))
-		if (!line.empty()) totalQuestions++; // each line counts
+	{
+		if (!line.empty())
+		{
+			totalQuestions++; // each line counts
+		}
+
+	}
 	totalQuestions /= 6; // 6 lines per question
 
 	sq.clear();            // reset EOF flag
@@ -105,40 +113,271 @@ void Sciencequestions()
 	srand(time(0));
 	int qNum = rand() % totalQuestions; // 0 to totalQuestions-1
 	Question q;
-	for (int i = 0; i <= qNum; i++) {
+	for (int i = 0; i <= qNum; i++)
+	{
 		getline(sq, q.q);               // question text
 		for (int j = 0; j < 4; j++)
+		{
 			getline(sq, q.options[j]); // options
+		}
 		sq >> q.answer;                  // correct answer
 		sq.ignore();                     // skip leftover newline
 	}
 	cout << q.q << endl;
 	for (int i = 0; i < 4; i++)
+	{
 		cout << i + 1 << ") " << q.options[i] << endl;
+	}
 	int userAns;
 	cin >> userAns;
-
 	if (userAns == q.answer)
+	{
 		cout << "Correct!" << endl;
+	}
 	else
-		cout << "Wrong! Correct answer: " << q.answer
-		<< ") " << q.options[q.answer - 1] << endl;
+	{
+		cout << "Wrong! Correct answer: " << q.answer << ") " << q.options[q.answer - 1] << endl;
+	}
+
 
 	sq.close();
 }
 void Computerquestions()
 {
+	struct Question
+	{
+		string q;
+		string options[4];
+		int answer;
+	};
 
+	ifstream cq("computer.txt");
+	if (!cq)
+	{
+		cout << "File not found!" << endl;
+		return;
+	}
+	int totalQuestions = 0;
+	string line;
+	while (getline(cq, line))
+	{
+		if (!line.empty())
+		{
+			totalQuestions++; // each line counts
+		}
+
+	}
+	totalQuestions /= 6; // 6 lines per question
+
+	cq.clear();            // reset EOF flag
+	cq.seekg(0);           // go back to start of file
+	srand(time(0));
+	int qNum = rand() % totalQuestions; // 0 to totalQuestions-1
+	Question q;
+	for (int i = 0; i <= qNum; i++)
+	{
+		getline(cq, q.q);               // question text
+		for (int j = 0; j < 4; j++)
+		{
+			getline(cq, q.options[j]); // options
+		}
+		cq >> q.answer;                  // correct answer
+		cq.ignore();                     // skip leftover newline
+	}
+	cout << q.q << endl;
+	for (int i = 0; i < 4; i++)
+	{
+		cout << i + 1 << ") " << q.options[i] << endl;
+	}
+	int userAns;
+	cin >> userAns;
+	if (userAns == q.answer)
+	{
+		cout << "Correct!" << endl;
+	}
+	else
+	{
+		cout << "Wrong! Correct answer: " << q.answer << ") " << q.options[q.answer - 1] << endl;
+	}
+
+
+	cq.close();
 }
 void Sportsquestions()
 {
-
+	struct Question 
+	{
+		string q;
+		string options[4];
+		int answer;
+	};
+	ifstream soq("sports.txt");
+	if (!soq) 
+	{
+		cout << "File not found!" << endl;
+		return;
+	}
+	int totalQuestions = 0;
+	string line;
+	while (getline(soq, line))
+	{
+		if (!line.empty())
+		{
+			totalQuestions++; // each line counts
+		}
+	} 
+	totalQuestions /= 6; // 6 lines per question
+	soq.clear();            // reset EOF flag
+	soq.seekg(0);           // go back to start of file
+	srand(time(0));
+	int qNum = rand() % totalQuestions; // 0 to totalQuestions-1
+	Question q;
+	for (int i = 0; i <= qNum; i++) 
+	{
+		getline(soq, q.q);               // question text
+		for (int j = 0; j < 4; j++)
+		{
+			getline(soq, q.options[j]); // options
+		}
+		soq >> q.answer;                  // correct answer
+		soq.ignore();                     // skip leftover newline
+	}
+	cout << q.q << endl;
+	for (int i = 0; i < 4; i++)
+	{
+		cout << i + 1 << ") " << q.options[i] << endl;
+	}
+	int userAns;
+	cin >> userAns;
+	if (userAns == q.answer)
+	{
+		cout << "Correct!" << endl;
+	}
+	else
+	{
+		cout << "Wrong! Correct answer: " << q.answer<< ") " << q.options[q.answer - 1] << endl;
+	}
+	soq.close();
 }
 void Historyquestions()
 {
+	struct Question 
+	{
+		string q;
+		string options[4];
+		int answer;
+	};
 
+	ifstream hq("history.txt");
+	if (!hq) 
+	{
+		cout << "File not found!" << endl;
+		return;
+	}
+	int totalQuestions = 0;
+	string line;
+	while (getline(hq, line))
+	{
+		if (!line.empty())
+		{
+			totalQuestions++; // each line counts
+		}
+		
+	}
+	totalQuestions /= 6; // 6 lines per question
+
+	hq.clear();            // reset EOF flag
+	hq.seekg(0);           // go back to start of file
+	srand(time(0));
+	int qNum = rand() % totalQuestions; // 0 to totalQuestions-1
+	Question q;
+	for (int i = 0; i <= qNum; i++) 
+	{
+		getline(hq, q.q);               // question text
+		for (int j = 0; j < 4; j++)
+		{
+			getline(hq, q.options[j]); // options
+		}
+		hq >> q.answer;                  // correct answer
+		hq.ignore();                     // skip leftover newline
+	}
+	cout << q.q << endl;
+	for (int i = 0; i < 4; i++)
+	{
+		cout << i + 1 << ") " << q.options[i] << endl;
+	}	
+	int userAns;
+	cin >> userAns;
+	if (userAns == q.answer)
+	{
+		cout << "Correct!" << endl;
+	}
+	else
+	{
+		cout << "Wrong! Correct answer: " << q.answer << ") " << q.options[q.answer - 1] << endl;
+	}
+		
+
+	hq.close();
 }
 void Logicquestions()
 {
+	struct Question
+	{
+		string q;
+		string options[4];
+		int answer;
+	};
 
+	ifstream lq("iq.txt");
+	if (!lq)
+	{
+		cout << "File not found!" << endl;
+		return;
+	}
+	int totalQuestions = 0;
+	string line;
+	while (getline(lq, line))
+	{
+		if (!line.empty())
+		{
+			totalQuestions++; // each line counts
+		}
+
+	}
+	totalQuestions /= 6; // 6 lines per question
+
+	lq.clear();            // reset EOF flag
+	lq.seekg(0);           // go back to start of file
+	srand(time(0));
+	int qNum = rand() % totalQuestions; // 0 to totalQuestions-1
+	Question q;
+	for (int i = 0; i <= qNum; i++)
+	{
+		getline(lq, q.q);               // question text
+		for (int j = 0; j < 4; j++)
+		{
+			getline(lq, q.options[j]); // options
+		}
+		lq >> q.answer;                  // correct answer
+		lq.ignore();                     // skip leftover newline
+	}
+	cout << q.q << endl;
+	for (int i = 0; i < 4; i++)
+	{
+		cout << i + 1 << ") " << q.options[i] << endl;
+	}
+	int userAns;
+	cin >> userAns;
+	if (userAns == q.answer)
+	{
+		cout << "Correct!" << endl;
+	}
+	else
+	{
+		cout << "Wrong! Correct answer: " << q.answer << ") " << q.options[q.answer - 1] << endl;
+	}
+
+
+	lq.close();
 }
