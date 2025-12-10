@@ -13,7 +13,7 @@ void Historyquestions();
 void Logicquestions();
 int main()
 {
-	int input,input1;a
+	int input,input1;
 	cout << "      Welcome to Quiz game" << endl;
 	cout << "--------------------------------------" << endl;
 	mainmenue();
@@ -54,10 +54,12 @@ int main()
 			Logicquestions();
 			break;
 		}
+		break;
 	case 2:
 		break;
 	case 3:
 		break;
+		
 	}
 }
 void mainmenue()
@@ -81,27 +83,48 @@ void submenue()
 }
 void Sciencequestions()
 {
-	struct Question
-	{
+	struct Question {
 		string q;
 		string options[4];
 		int answer;
 	};
-	ifstream sq("science.txt");  //sq = science questions
-	if (!sq)
-	{
-		cout << "File not found" << endl;
+
+	ifstream sq("science.txt");  
+	if (!sq) {
+		cout << "File not found!" << endl;
 		return;
 	}
-	Question q;
-	getline(sq, q.q);  //Reading Questions
-	for (int i = 0; i < 4; i++)
-	{
-		getline(sq, q.options[i]);  // read option of questions
-	}
-	sq >> q.answer;
-	sq.ignore(); //it will ignore remaining lines.
+	int totalQuestions = 0;
+	string line;
+	while (getline(sq, line))
+		if (!line.empty()) totalQuestions++; // each line counts
+	totalQuestions /= 6; // 6 lines per question
 
+	sq.clear();            // reset EOF flag
+	sq.seekg(0);           // go back to start of file
+	srand(time(0));
+	int qNum = rand() % totalQuestions; // 0 to totalQuestions-1
+	Question q;
+	for (int i = 0; i <= qNum; i++) {
+		getline(sq, q.q);               // question text
+		for (int j = 0; j < 4; j++)
+			getline(sq, q.options[j]); // options
+		sq >> q.answer;                  // correct answer
+		sq.ignore();                     // skip leftover newline
+	}
+	cout << q.q << endl;
+	for (int i = 0; i < 4; i++)
+		cout << i + 1 << ") " << q.options[i] << endl;
+	int userAns;
+	cin >> userAns;
+
+	if (userAns == q.answer)
+		cout << "Correct!" << endl;
+	else
+		cout << "Wrong! Correct answer: " << q.answer
+		<< ") " << q.options[q.answer - 1] << endl;
+
+	sq.close();
 }
 void Computerquestions()
 {
