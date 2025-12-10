@@ -17,7 +17,7 @@ int main()
 	int input,input1;
 	cout << "====================================" << endl;
 	cout << "      Welcome to Quiz game          " << endl;
-	cout << "--------------------------------------" << endl;
+	cout << "------------------------------------" << endl;
 	mainmenue();
 	cin >> input;
 	if (input != 1 && input != 2 && input != 3)
