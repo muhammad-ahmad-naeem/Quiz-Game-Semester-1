@@ -266,21 +266,52 @@ void Sciencequestions(int& highscore)   //easy level questions
         {
             lifeline_5050 = true;
             cout << "Two options will be removed " << endl;
+
             int correct = answer[r];
             int remove = 0;
+            int allowed[5] = { 0, 1, 1, 1, 1 };
+
             for (int i = 1; i <= 4; i++)
             {
                 if (i == correct)
-                {
                     continue;
-                }
+
                 if (remove < 2)
                 {
-                    cout << "Option : " << i << " Removed " << endl;
+                    allowed[i] = 0; 
                     remove++;
                 }
             }
+            for (int i = 1; i <= 4; i++)
+            {
+                if (allowed[i] == 1)
+                    continue;      
+                if (i == 1) 
+                    cout << OptA[r] << " Removed " << endl;
+                if (i == 2) 
+                    cout << OptB[r] << " Removed " << endl;
+                if (i == 3) 
+                    cout << OptC[r] << " Removed " << endl;
+                if (i == 4) 
+                    cout << OptD[r] << " Removed " << endl;
+            }
+            cout << Questions[r] << endl;
+            for (int j = 1; j <= 4; j++)
+            {
+                if (allowed[j] == 0)
+                    continue;      
+
+                if (j == 1) 
+                    cout << "1. " << OptA[r] << endl;
+                if (j == 2) 
+                    cout << "2. " << OptB[r] << endl;
+                if (j == 3) 
+                    cout << "3. " << OptC[r] << endl;
+                if (j == 4) 
+                    cout << "4. " << OptD[r] << endl;
+            }
         }
+
         else if (choice == 2 && lifeline_skip == false)
         {
             lifeline_skip = true;
