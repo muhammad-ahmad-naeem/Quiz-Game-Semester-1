@@ -9,18 +9,23 @@ void submenue();
 void diffcultymenue();
 void Sciencequestions(int& highscore);
 void Sciencequestionsmid(int& highscore);
+void Sciencequestionshard(int& highscore);
 
 void Computerquestions(int& highscore);
 void Computerquestionsmid(int& highscore);
+void Computerquestionshard(int& highscore);
 
 void Sportsquestions(int& highscore);
 void Sportsquestionsmid(int& highscore);
+void Sportsquestionshard(int& highscore);
 
 void Historyquestions(int& highscore);
 void Historyquestionsmid(int& highscore);
+void Historyquestionshard(int& highscore);
 
 void Logicquestions(int& highscore);
 void Logicquestionsmid(int& highscore);
+void Logicquestionshard(int& highscore);
 
 int getValidatedInput(int minOption, int maxOption)
 {
@@ -94,12 +99,66 @@ int main()
                             break;
                         }
                     } while (input1 != 6);
-                    break;
+                    break;                         //east tier questions end here
 
                 case 2:
-                    break;
+                    cout << "Select from the topic below" << endl;
+                    do
+                    {
+                        submenue();
+                        input1 = getValidatedInput(1, 6);
+                        switch (input1)
+                        {
+                        case 1:
+                            Sciencequestionsmid(highscore);
+                            break;
+                        case 2:
+                            Computerquestionsmid(highscore);
+                            break;
+                        case 3:
+                            Sportsquestionsmid(highscore);
+                            break;
+                        case 4:
+                            Historyquestionsmid(highscore);
+                            break;
+                        case 5:
+                            Logicquestionsmid(highscore);
+                            break;
+                        case 6:
+                            break;
+                        }
+                    } while (input1 != 6);
+                    break;                            //MID Tier Question end here
+
+
                 case 3:
-                    break;
+                    cout << "Select from the topic below" << endl;
+                    do
+                    {
+                        submenue();
+                        input1 = getValidatedInput(1, 6);
+                        switch (input1)
+                        {
+                        case 1:
+                            Sciencequestionshard(highscore);
+                            break;
+                        case 2:
+                            Computerquestionshard(highscore);
+                            break;
+                        case 3:
+                            Sportsquestionshard(highscore);
+                            break;
+                        case 4:
+                            Historyquestionshard(highscore);
+                            break;
+                        case 5:
+                            Logicquestionshard(highscore);
+                            break;
+                        case 6:
+                            break;
+                        }
+                    } while (input1 != 6);
+                    break;                            //hard tier questions end here
                 case 4:
                     input = 0;
                     break;
@@ -155,7 +214,8 @@ void diffcultymenue()
 
 
 
-void Sciencequestions(int& highscore)
+//questions for sciences
+void Sciencequestions(int& highscore)   //easy level questions
 {
     srand(time(0));
     ifstream file("science.txt");
@@ -194,7 +254,7 @@ void Sciencequestions(int& highscore)
     }
 }
 
-void Sciencequestionsmid(int& highscore)
+void Sciencequestionsmid(int& highscore)   //meduim level questions
 {
     srand(time(0));
     ifstream file("sciencemid.txt");
@@ -234,10 +294,50 @@ void Sciencequestionsmid(int& highscore)
 }
 
 
+void Sciencequestionshard(int &highscore)   //Hard level questions
+{
+    srand(time(0));
+    ifstream file("sciencehard.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
 
 
 
-void Computerquestions(int& highscore)
+
+//questions for computer
+void Computerquestions(int& highscore)   //easy level questions
 {
     srand(time(0));
     ifstream file("computer.txt");
@@ -276,7 +376,7 @@ void Computerquestions(int& highscore)
     }
 }
 
-void Computerquestionsmid(int& highscore)
+void Computerquestionsmid(int& highscore)   //medium level questions
 {
     srand(time(0));
     ifstream file("computermid.txt");
@@ -315,11 +415,17 @@ void Computerquestionsmid(int& highscore)
     }
 }
 
+void Computerquestionshard(int& highscore)   //hard level questions
+{
+
+}
 
 
 
 
-void Sportsquestions(int& highscore)
+
+//questions for sports
+void Sportsquestions(int& highscore)   //easy level questions
 {
     srand(time(0));
     ifstream file("sports.txt");
@@ -358,7 +464,7 @@ void Sportsquestions(int& highscore)
     }
 }
 
-void Sportsquestionsmid(int& highscore)
+void Sportsquestionsmid(int& highscore)   //hard level questions
 {
     srand(time(0));
     ifstream file("sportsmid.txt");
@@ -397,11 +503,51 @@ void Sportsquestionsmid(int& highscore)
     }
 }
 
+void Sportsquestionshard(int& highscore)   //hard level questions
+{
+    srand(time(0));
+    ifstream file("sportshard.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
 
 
 
 
-void Historyquestions(int& highscore)
+
+//questions for History
+void Historyquestions(int& highscore)   //easy level questions
 {
     srand(time(0));
     ifstream file("history.txt");
@@ -440,10 +586,50 @@ void Historyquestions(int& highscore)
     }
 }
 
-void Historyquestionsmid(int& highscore)
+void Historyquestionsmid(int& highscore)   ///meduim level questions
 {
     srand(time(0));
     ifstream file("historymid.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        int userans;
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+
+void Historyquestionshard(int& highscore)   //hard level questions
+{
+    srand(time(0));
+    ifstream file("historyhard.txt");
     if (!file)
         cout << "ERROR: File Not found" << endl;
     else
@@ -483,7 +669,8 @@ void Historyquestionsmid(int& highscore)
 
 
 
-void Logicquestions(int& highscore)
+//questions for logic and iq
+void Logicquestions(int& highscore)   //easy level questions
 {
     srand(time(0));
     ifstream file("iq.txt");
@@ -521,10 +708,50 @@ void Logicquestions(int& highscore)
             cout << "Your Answer is Incorrect" << endl;
     }
 }
-void Logicquestionsmid(int& highscore)
+
+void Logicquestionsmid(int& highscore)   //meduim level questions
 {
     srand(time(0));
     ifstream file("iqmid.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+
+void Logicquestionshard(int& highscore)   //hard level question
+{
+    srand(time(0));
+    ifstream file("iqhard.txt");
     if (!file)
         cout << "ERROR: File Not found" << endl;
     else
