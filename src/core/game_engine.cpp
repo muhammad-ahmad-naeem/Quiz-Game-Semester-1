@@ -4,6 +4,11 @@
 #include <cstdlib>
 #include <fstream>
 using namespace std;
+bool lifeline_5050 = false;
+bool lifeline_skip = false;
+bool lifeline_replace_question = false;
+bool lifeline_extratime = false;
+void liflines_system();
 void mainmenue();
 void submenue();
 void diffcultymenue();
@@ -209,9 +214,19 @@ void diffcultymenue()
     cout << "Enter 4 ==>  GO TO MAIN MENU" << endl;
     cout << endl;
 }
-
-
-
+void liflines_system()
+{
+    cout << "\n========================================\n";
+    cout << "           LIFELINES MENU\n";
+    cout << "========================================\n";
+    cout << " 1) 50/50          -> removes two wrong options\n";
+    cout << " 2) Skip Question  -> skip without penalty\n";
+    cout << " 3) Replace        -> get a completely new question\n";
+    cout << " 4) Extra Time     -> +10 seconds for this question\n";
+    cout << " 5) No Lifeline    -> answer without using any help\n";
+    cout << "----------------------------------------\n";
+    cout << " Choose your lifeline (1-5): ";
+}
 
 
 //questions for sciences
@@ -243,6 +258,56 @@ void Sciencequestions(int& highscore)   //easy level questions
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << "Enter your Answer = ";
+        liflines_system();
+        int choice;
+        cout << "Enter your choice within the given options" << endl;
+        cin >> choice;
+        if (choice == 1 && lifeline_5050 == false)
+        {
+            lifeline_5050 = true;
+            cout << "Two options will be removed " << endl;
+            int correct = answer[r];
+            int remove = 0;
+            for (int i = 1; i <= 4; i++)
+            {
+                if (i == correct)
+                {
+                    continue;
+                }
+                if (remove < 2)
+                {
+                    cout << "Option : " << i << " Removed " << endl;
+                    remove++;
+                }
+            }
+        }
+        else if (choice == 2 && lifeline_skip == false)
+        {
+            lifeline_skip = true;
+            cout << "The question is skipped successfully " << endl;
+            return;
+        }
+        else if (choice == 3 && lifeline_replace_question == false)
+        {
+            lifeline_replace_question = true;
+            r = rand() % 10;
+            cout << "--------------------------------------" << endl;
+            cout << Questions[r] << endl;
+            cout << "1. " << OptA[r] << endl;
+            cout << "2. " << OptB[r] << endl;
+            cout << "3. " << OptC[r] << endl;
+            cout << "4. " << OptD[r] << endl;
+        }
+        else if (choice == 4 && lifeline_extratime == false)
+        {
+            lifeline_extratime = true;
+            cout << "You got 10 extra seconds " << endl;
+        }
+        else if (choice == 5)
+        {
+            cout << "  you selected not to choose any lifeline  ";
+            cout << endl;
+        }
         userans = getValidatedInput(1, 4);
         if (userans == answer[r])
         {
@@ -294,7 +359,7 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
 }
 
 
-void Sciencequestionshard(int &highscore)   //Hard level questions
+void Sciencequestionshard(int& highscore)   //Hard level questions
 {
     srand(time(0));
     ifstream file("sciencehard.txt");
