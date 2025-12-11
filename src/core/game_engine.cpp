@@ -41,7 +41,7 @@ int getValidatedInput(int minOption, int maxOption)
 }
 int main()
 {
-    int input, input1, input3, highscore = 1;
+    int input, input1, input3, highscore = 0;
     cout << "====================================" << endl;
     cout << "      Welcome to Quiz game          " << endl;
     cout << "------------------------------------" << endl;
@@ -58,6 +58,7 @@ int main()
         }
         switch (input)
         {
+
         case 1:
             do
             {
@@ -150,6 +151,10 @@ void diffcultymenue()
     cout << endl;
 }
 
+
+
+
+
 void Sciencequestions(int& highscore)
 {
     srand(time(0));
@@ -188,6 +193,49 @@ void Sciencequestions(int& highscore)
             cout << "Your Answer is Incorrect" << endl;
     }
 }
+
+void Sciencequestionsmid(int& highscore)
+{
+    srand(time(0));
+    ifstream file("sciencemid.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+
+
+
+
 
 void Computerquestions(int& highscore)
 {
@@ -228,6 +276,49 @@ void Computerquestions(int& highscore)
     }
 }
 
+void Computerquestionsmid(int& highscore)
+{
+    srand(time(0));
+    ifstream file("computermid.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+
+
+
+
+
 void Sportsquestions(int& highscore)
 {
     srand(time(0));
@@ -266,6 +357,49 @@ void Sportsquestions(int& highscore)
             cout << "Your Answer is Incorrect" << endl;
     }
 }
+
+void Sportsquestionsmid(int& highscore)
+{
+    srand(time(0));
+    ifstream file("sportsmid.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+
+
+
+
 
 void Historyquestions(int& highscore)
 {
@@ -306,10 +440,91 @@ void Historyquestions(int& highscore)
     }
 }
 
+void Historyquestionsmid(int& highscore)
+{
+    srand(time(0));
+    ifstream file("historymid.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+
+
+
+
+
 void Logicquestions(int& highscore)
 {
     srand(time(0));
     ifstream file("iq.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
+}
+void Logicquestionsmid(int& highscore)
+{
+    srand(time(0));
+    ifstream file("iqmid.txt");
     if (!file)
         cout << "ERROR: File Not found" << endl;
     else
