@@ -434,7 +434,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             else
             {
                 cout << endl;
-                cout << "Your Answer is Incorrect" << endl;
+                cout << "" << endl;
             }
         }
         if (userans == answer[r])
@@ -442,10 +442,11 @@ void Sciencequestions(int& highscore)   //easy level questions
             cout << endl;
             cout << "Your Answer is Correct" << endl;
             highscore++;
+            cout << highscore;
         }
         else
         {
-            cout << "     Your Answer is Incorrect" << endl;
+            cout << " <<Your Answer is Incorrect>>" << endl;
             cout << endl;
         }
             
