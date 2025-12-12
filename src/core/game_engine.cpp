@@ -353,7 +353,7 @@ void Sciencequestions(int& highscore)   //easy level questions
         {
             cout << "Enter your Answer = " << endl;
             cout << "You choose not to use any lifeline " << endl;
-        }         
+        }
         userans = getValidatedInput(1, 4);
         if (userans == answer[r])
         {
