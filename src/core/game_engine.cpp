@@ -51,6 +51,64 @@ int getValidatedInput(int minOption, int maxOption)
     }
     return input;
 }
+
+int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
+{
+    time_t start = time(0);
+    string buffer;
+    cout << " (You have " << timeLimitSeconds << " seconds) " << flush;
+    cout << endl;
+
+    while (true)
+    {
+        double elapsed = difftime(time(0), start);
+        if (elapsed >= timeLimitSeconds)
+        {
+            cout << "-----------------" << endl;
+            cout << "   Time is up!" << endl;
+            cout << "-----------------" << endl;
+            cout << endl;
+           
+            return -1;
+        }
+
+        if (_kbhit())
+        {
+            char ch = _getch();
+            if (ch == '\r' || ch == '\n')
+            {
+                if (!buffer.empty())
+                {
+                    int value = stoi(buffer);
+                    if (value >= minOption && value <= maxOption)
+                    {
+                        cout << endl;
+                        return value;
+                    }
+                    else
+                    {
+                        cout << "\nError: invalid option. Try again: " << flush;
+                        buffer.clear();
+                    }
+                }
+            }
+            else if (ch == '\b' || ch == 127)
+            {
+                if (!buffer.empty())
+                {
+                    buffer.pop_back();
+                    cout << "\b \b" << flush;
+                }
+            }
+            else if (ch >= '0' && ch <= '9')
+            {
+                buffer.push_back(ch);
+                cout << ch << flush;
+            }
+        }
+    }
+}
+
 int main()
 {
     int input, input1, input3, highscore = 0;
@@ -61,6 +119,7 @@ int main()
     {
         mainmenue();
         input = getValidatedInput(1, 3);
+        system("cls");
         if (input == 3)
             break;
         if (input == 2)
@@ -76,7 +135,7 @@ int main()
             {
                 diffcultymenue();
                 input3 = getValidatedInput(1, 4);
-
+                system("cls");
                 switch (input3)
                 {
                 case 1:
@@ -85,6 +144,7 @@ int main()
                     {
                         submenue();
                         input1 = getValidatedInput(1, 6);
+                        system("cls");
                         switch (input1)
                         {
                         case 1:
@@ -115,6 +175,7 @@ int main()
                         submenue();
                         input1 = getValidatedInput(1, 6);
                         switch (input1)
+                            
                         {
                         case 1:
                             Sciencequestionsmid(highscore);
@@ -172,12 +233,6 @@ int main()
                 }
 
             } while (input3 != 4);
-            break;
-
-        case 2:
-            break;
-
-        case 3:
             break;
         }
     }
@@ -252,36 +307,45 @@ void Sciencequestions(int& highscore)   //easy level questions
             file >> answer[i];
             file.ignore();
         }
-        int r = rand() % 10, userans;
+        int r = rand() % 10;
+        int userans = 0;
+        int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
+        int extraSeconds = 0; // extra seconds added by lifeline
         cout << "--------------------------------------" << endl;
         cout << Questions[r] << endl;
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
-        cout << "5. Do you want to use your lifelines  (y/n) " << endl;
+        cout << endl;
+        cout << "==> Do you want to use your lifelines (y/n) =  ";
         char user_choice;
+        
         cin >> user_choice;
         if (user_choice == 'y')
         {
+            system("cls");
             liflines_system();
             int choice;
-            cout << "Enter your choice within the given options" << endl;
+            cout << " " << endl;
+            cout << "Enter your choice = ";
             cin >> choice;
+            system("cls");
             if (choice == 1 && lifeline_5050 == false)
             {
                 lifeline_5050 = true;
-                cout << "Two option removed " << endl << endl << endl;
-
+                cout << " " << endl;
+                cout << "Two option removed " << endl;
                 int correct = answer[r];
                 int remove = 0;
-                int allowed[5] = { 0, 1, 1, 1, 1 };
-
+                for (int i = 1; i <= 4; i++)
+                {
+                    allowed[i] = 1; // ensure default
+                }
                 for (int i = 1; i <= 4; i++)
                 {
                     if (i == correct)
                         continue;
-
                     if (remove < 2)
                     {
                         allowed[i] = 0;
@@ -292,21 +356,13 @@ void Sciencequestions(int& highscore)   //easy level questions
                 {
                     if (allowed[i] == 1)
                         continue;
-                    if (i == 1)
-                        cout << OptA[r] << " Removed " << endl << endl << endl;
-                    if (i == 2)
-                        cout << OptB[r] << " Removed " << endl << endl << endl;
-                    if (i == 3)
-                        cout << OptC[r] << " Removed " << endl << endl << endl;
-                    if (i == 4)
-                        cout << OptD[r] << " Removed " << endl << endl << endl;
+                   
                 }
                 cout << Questions[r] << endl;
                 for (int j = 1; j <= 4; j++)
                 {
                     if (allowed[j] == 0)
                         continue;
-
                     if (j == 1)
                         cout << "1. " << OptA[r] << endl;
                     if (j == 2)
@@ -316,7 +372,6 @@ void Sciencequestions(int& highscore)   //easy level questions
                     if (j == 4)
                         cout << "4. " << OptD[r] << endl;
                 }
-
             }
             else if (choice == 2 && lifeline_skip == false)
             {
@@ -338,11 +393,12 @@ void Sciencequestions(int& highscore)   //easy level questions
             else if (choice == 4 && lifeline_extratime == false)
             {
                 lifeline_extratime = true;
+                extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
             }
             else if (choice == 5)
             {
-                cout << "  you selected not to choose any lifeline  ";
+                cout << " you selected not to choose any lifeline ";
                 cout << endl;
             }
             else
@@ -353,17 +409,46 @@ void Sciencequestions(int& highscore)   //easy level questions
         }
         else
         {
-            cout << "Enter your Answer = " << endl;
-            cout << "You choose not to use any lifeline " << endl;
+            cout << " " << endl;
+            cout << " You choose not to use any lifeline " << endl;
         }
-        userans = getValidatedInput(1, 4);
+        int timeForThis = 10 + extraSeconds;
+        userans = getTimedAnswer(1, 4, timeForThis);
+        if (userans == -1)
+        {
+            cout << " << You failed to answer in time. >>" << endl;
+        }
+        else
+        {
+            if (allowed[userans] == 0)
+            {
+                cout << endl;
+                cout << "That option was removed by 50/50 lifeline. Incorrect." << endl;
+            }
+            else if (userans == answer[r])
+            {
+                cout << endl;
+                cout << "Your Answer is Correct" << endl;
+                highscore++;
+            }
+            else
+            {
+                cout << endl;
+                cout << "Your Answer is Incorrect" << endl;
+            }
+        }
         if (userans == answer[r])
         {
+            cout << endl;
             cout << "Your Answer is Correct" << endl;
             highscore++;
         }
         else
-            cout << "Your Answer is Incorrect" << endl;
+        {
+            cout << "     Your Answer is Incorrect" << endl;
+            cout << endl;
+        }
+            
     }
 }
 
@@ -387,15 +472,19 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             file >> answer[i];
             file.ignore();
         }
-        int r = rand() % 10, userans;
+        int r = rand() % 10;
+        int userans = 0;
+        int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
+        int extraSeconds = 0; // extra seconds added by lifeline
         cout << "--------------------------------------" << endl;
         cout << Questions[r] << endl;
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
-        cout << "5. Do you want to use your lifelines  (y/n) " << endl;
+        cout << "5. Do you want to use your lifelines (y/n) " << endl;
         char user_choice;
+        cout << "Enter Answer here" << endl;
         cin >> user_choice;
         if (user_choice == 'y')
         {
@@ -407,16 +496,16 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             {
                 lifeline_5050 = true;
                 cout << "Two option removed " << endl << endl << endl;
-
                 int correct = answer[r];
                 int remove = 0;
-                int allowed[5] = { 0, 1, 1, 1, 1 };
-
+                for (int i = 1; i <= 4; i++)
+                {
+                    allowed[i] = 1; // ensure default
+                }
                 for (int i = 1; i <= 4; i++)
                 {
                     if (i == correct)
                         continue;
-
                     if (remove < 2)
                     {
                         allowed[i] = 0;
@@ -441,7 +530,6 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
                 {
                     if (allowed[j] == 0)
                         continue;
-
                     if (j == 1)
                         cout << "1. " << OptA[r] << endl;
                     if (j == 2)
@@ -451,7 +539,6 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
                     if (j == 4)
                         cout << "4. " << OptD[r] << endl;
                 }
-
             }
             else if (choice == 2 && lifeline_skip == false)
             {
@@ -473,11 +560,12 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             else if (choice == 4 && lifeline_extratime == false)
             {
                 lifeline_extratime = true;
+                extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
             }
             else if (choice == 5)
             {
-                cout << "  you selected not to choose any lifeline  ";
+                cout << " you selected not to choose any lifeline ";
                 cout << endl;
             }
             else
@@ -491,7 +579,29 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             cout << "Enter your Answer = " << endl;
             cout << "You choose not to use any lifeline " << endl;
         }
-        userans = getValidatedInput(1, 4);
+        int timeForThis = 10 + extraSeconds;
+        userans = getTimedAnswer(1, 4, timeForThis);
+        if (userans == -1)
+        {
+            cout << "You failed to answer in time." << endl;
+            cout << "Your Answer is Incorrect" << endl;
+        }
+        else
+        {
+            if (allowed[userans] == 0)
+            {
+                cout << "That option was removed by 50/50 lifeline. Incorrect." << endl;
+            }
+            else if (userans == answer[r])
+            {
+                cout << "Your Answer is Correct" << endl;
+                highscore++;
+            }
+            else
+            {
+                cout << "Your Answer is Incorrect" << endl;
+            }
+        }
         if (userans == answer[r])
         {
             cout << "Your Answer is Correct" << endl;
