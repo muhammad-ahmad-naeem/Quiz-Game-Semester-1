@@ -3,6 +3,8 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
+#include <conio.h>
+#include <ctime>
 using namespace std;
 bool lifeline_5050 = false;
 bool lifeline_skip = false;
