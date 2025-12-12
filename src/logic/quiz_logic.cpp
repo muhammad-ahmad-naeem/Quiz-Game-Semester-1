@@ -57,13 +57,36 @@ int getValidatedInput(int minOption, int maxOption)
     return input;
 }
 
+// Get current date in DD-MM-YYYY format
+string getCurrentDate() {
+    time_t now = time(0);
+    tm ltm;                       // create tm object (not pointer)
+    localtime_s(&ltm, &now); 
+    char buf[20];
+    sprintf_s(buf, "%02d-%02d-%04d", ltm.tm_mday, ltm.tm_mon + 1, 1900 + ltm.tm_year);
+    return string(buf);
+}
+
+
+// Save quiz session log to file with date
+void saveQuizLog(const char* playerName, int score) {
+    ofstream logfile("quiz_log.txt", ios::app);
+    if (logfile.is_open()) {
+        string date = getCurrentDate();
+        logfile << "Name: " << playerName
+            << " | Score: " << score
+            << " | Date: " << date
+            << endl;
+        logfile.close();
+    }
+}
+
 int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
 {
     time_t start = time(0);
     string buffer;
     cout << " (You have " << timeLimitSeconds << " seconds) " << flush;
     cout << endl;
-
     while (true)
     {
         double elapsed = difftime(time(0), start);
@@ -75,7 +98,6 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
             cout << endl;
             return -1;
         }
-
         if (_kbhit())
         {
             char ch = _getch();
@@ -130,26 +152,23 @@ int main()
         mainmenue();
         input = getValidatedInput(1, 4); // Updated to include Top 5
         system("cls");
-
         if (input == 3)
         {
             savePlayerScore(playerName, highscore); // Save score on exit
+            saveQuizLog(playerName, highscore);
             break;
         }
-
         if (input == 2)
         {
             cout << "High score = " << highscore << endl;
             cout << "Your score = " << highscore << endl;
             continue;
         }
-
         if (input == 4)
         {
             showTopPlayers();
             continue;
         }
-
         switch (input)
         {
         case 1:
@@ -328,14 +347,12 @@ void showTopPlayers()
     char names[MAX_PLAYERS][50];
     int scores[MAX_PLAYERS];
     int count = 0;
-
     ifstream file("players_scores.txt");
     if (!file)
     {
         cout << "No scores found!" << endl;
         return;
     }
-
     while (file >> names[count] >> scores[count])
     {
         count++;
@@ -361,7 +378,6 @@ void showTopPlayers()
             }
         }
     }
-   
     cout << "\n===== TOP 5 PLAYERS =====\n";
     cout << "Rank   Name        Score\n";
     cout << "------------------------\n";
@@ -375,173 +391,4 @@ void showTopPlayers()
     cin >> a;
     system("cls");
     
-}
-
-
-
-//questions for sciences
-void Sciencequestions(int& highscore)   //easy level questions
-{
-    srand(time(0));
-    ifstream file("science.txt");
-    if (!file)
-        cout << "ERROR: File Not found" << endl;
-    else
-    {
-        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
-        int answer[10];
-        for (int i = 0; i < 10; i++)
-        {
-            getline(file, Questions[i]);
-            getline(file, OptA[i]);
-            getline(file, OptB[i]);
-            getline(file, OptC[i]);
-            getline(file, OptD[i]);
-            file >> answer[i];
-            file.ignore();
-        }
-        int r = rand() % 10;
-        int userans = 0;
-        int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
-        int extraSeconds = 0; // extra seconds added by lifeline
-        cout << "--------------------------------------" << endl;
-        cout << Questions[r] << endl;
-        cout << "1. " << OptA[r] << endl;
-        cout << "2. " << OptB[r] << endl;
-        cout << "3. " << OptC[r] << endl;
-        cout << "4. " << OptD[r] << endl;
-        cout << endl;
-        cout << "==> Do you want to use your lifelines (y/n) =  ";
-        char user_choice;
-        
-        cin >> user_choice;
-        if (user_choice == 'y')
-        {
-            system("cls");
-            liflines_system();
-            int choice;
-            cout << " " << endl;
-            cout << "Enter your choice = ";
-            cin >> choice;
-            system("cls");
-            if (choice == 1 && lifeline_5050 == false)
-            {
-                lifeline_5050 = true;
-                cout << " " << endl;
-                cout << "Two option removed " << endl;
-                int correct = answer[r];
-                int remove = 0;
-                for (int i = 1; i <= 4; i++)
-                {
-                    allowed[i] = 1; // ensure default
-                }
-                for (int i = 1; i <= 4; i++)
-                {
-                    if (i == correct)
-                        continue;
-                    if (remove < 2)
-                    {
-                        allowed[i] = 0;
-                        remove++;
-                    }
-                }
-                for (int i = 1; i <= 4; i++)
-                {
-                    if (allowed[i] == 1)
-                        continue;
-                   
-                }
-                cout << Questions[r] << endl;
-                for (int j = 1; j <= 4; j++)
-                {
-                    if (allowed[j] == 0)
-                        continue;
-                    if (j == 1)
-                        cout << "1. " << OptA[r] << endl;
-                    if (j == 2)
-                        cout << "2. " << OptB[r] << endl;
-                    if (j == 3)
-                        cout << "3. " << OptC[r] << endl;
-                    if (j == 4)
-                        cout << "4. " << OptD[r] << endl;
-                }
-            }
-            else if (choice == 2 && lifeline_skip == false)
-            {
-                lifeline_skip = true;
-                cout << "The question is skipped successfully " << endl;
-                return;
-            }
-            else if (choice == 3 && lifeline_replace_question == false)
-            {
-                lifeline_replace_question = true;
-                r = rand() % 10;
-                cout << "--------------------------------------" << endl;
-                cout << Questions[r] << endl;
-                cout << "1. " << OptA[r] << endl;
-                cout << "2. " << OptB[r] << endl;
-                cout << "3. " << OptC[r] << endl;
-                cout << "4. " << OptD[r] << endl;
-            }
-            else if (choice == 4 && lifeline_extratime == false)
-            {
-                lifeline_extratime = true;
-                extraSeconds += 10;
-                cout << "You got 10 extra seconds " << endl;
-            }
-            else if (choice == 5)
-            {
-                cout << " you selected not to choose any lifeline ";
-                cout << endl;
-            }
-            else
-            {
-                cout << "You already used this lifeline " << endl;
-            }
-            cout << "Enter your Answer = " << endl;
-        }
-        else
-        {
-            cout << " " << endl;
-            cout << " You choose not to use any lifeline " << endl;
-        }
-        int timeForThis = 10 + extraSeconds;
-        userans = getTimedAnswer(1, 4, timeForThis);
-        if (userans == -1)
-        {
-            cout << " << You failed to answer in time. >>" << endl;
-        }
-        else
-        {
-            if (allowed[userans] == 0)
-            {
-                cout << endl;
-                cout << "That option was removed by 50/50 lifeline. Incorrect." << endl;
-            }
-            else if (userans == answer[r])
-            {
-                cout << endl;
-                cout << "Your Answer is Correct" << endl;
-                highscore++;
-            }
-            else
-            {
-                cout << endl;
-                cout << "" << endl;
-            }
-        }
-        if (userans == answer[r])
-        {
-            cout << endl;
-            cout << "Your Answer is Correct" << endl;
-            highscore++;
-            cout << highscore;
-        }
-        else
-        {
-            cout << " <<Your Answer is Incorrect>>" << endl;
-            cout << endl;
-        }
-            
-    }
 }
