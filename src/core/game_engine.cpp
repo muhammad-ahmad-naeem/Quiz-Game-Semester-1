@@ -257,88 +257,100 @@ void Sciencequestions(int& highscore)   //easy level questions
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
-        cout << "Enter your Answer = ";
-        liflines_system();
-        int choice;
-        cout << "Enter your choice within the given options" << endl;
-        cin >> choice;
-        if (choice == 1 && lifeline_5050 == false)
+        cout << "Enter your Answer = " << endl;
+        cout << "Do you want to use your lifelines  (y/n) " << endl;
+        char user_choice;
+        cin >> user_choice;
+        if (user_choice == 'y')
         {
-            lifeline_5050 = true;
-            cout << "Two options will be removed " << endl;
-
-            int correct = answer[r];
-            int remove = 0;
-            int allowed[5] = { 0, 1, 1, 1, 1 };
-
-            for (int i = 1; i <= 4; i++)
+            liflines_system();
+            int choice;
+            cout << "Enter your choice within the given options" << endl;
+            cin >> choice;
+            if (choice == 1 && lifeline_5050 == false)
             {
-                if (i == correct)
-                    continue;
+                lifeline_5050 = true;
+                cout << "Two option removed " << endl;
 
-                if (remove < 2)
+                int correct = answer[r];
+                int remove = 0;
+                int allowed[5] = { 0, 1, 1, 1, 1 };
+
+                for (int i = 1; i <= 4; i++)
                 {
-                    allowed[i] = 0; 
-                    remove++;
+                    if (i == correct)
+                        continue;
+
+                    if (remove < 2)
+                    {
+                        allowed[i] = 0;
+                        remove++;
+                    }
                 }
-            }
-            for (int i = 1; i <= 4; i++)
-            {
-                if (allowed[i] == 1)
-                    continue;      
-                if (i == 1) 
-                    cout << OptA[r] << " Removed " << endl;
-                if (i == 2) 
-                    cout << OptB[r] << " Removed " << endl;
-                if (i == 3) 
-                    cout << OptC[r] << " Removed " << endl;
-                if (i == 4) 
-                    cout << OptD[r] << " Removed " << endl;
-            }
-            cout << Questions[r] << endl;
-            for (int j = 1; j <= 4; j++)
-            {
-                if (allowed[j] == 0)
-                    continue;      
+                for (int i = 1; i <= 4; i++)
+                {
+                    if (allowed[i] == 1)
+                        continue;
+                    if (i == 1)
+                        cout << OptA[r] << " Removed " << endl;
+                    if (i == 2)
+                        cout << OptB[r] << " Removed " << endl;
+                    if (i == 3)
+                        cout << OptC[r] << " Removed " << endl;
+                    if (i == 4)
+                        cout << OptD[r] << " Removed " << endl;
+                }
+                cout << Questions[r] << endl;
+                for (int j = 1; j <= 4; j++)
+                {
+                    if (allowed[j] == 0)
+                        continue;
 
-                if (j == 1) 
-                    cout << "1. " << OptA[r] << endl;
-                if (j == 2) 
-                    cout << "2. " << OptB[r] << endl;
-                if (j == 3) 
-                    cout << "3. " << OptC[r] << endl;
-                if (j == 4) 
-                    cout << "4. " << OptD[r] << endl;
+                    if (j == 1)
+                        cout << "1. " << OptA[r] << endl;
+                    if (j == 2)
+                        cout << "2. " << OptB[r] << endl;
+                    if (j == 3)
+                        cout << "3. " << OptC[r] << endl;
+                    if (j == 4)
+                        cout << "4. " << OptD[r] << endl;
+                }
+
+            }
+            else if (choice == 2 && lifeline_skip == false)
+            {
+                lifeline_skip = true;
+                cout << "The question is skipped successfully " << endl;
+                return;
+            }
+            else if (choice == 3 && lifeline_replace_question == false)
+            {
+                lifeline_replace_question = true;
+                r = rand() % 10;
+                cout << "--------------------------------------" << endl;
+                cout << Questions[r] << endl;
+                cout << "1. " << OptA[r] << endl;
+                cout << "2. " << OptB[r] << endl;
+                cout << "3. " << OptC[r] << endl;
+                cout << "4. " << OptD[r] << endl;
+            }
+            else if (choice == 4 && lifeline_extratime == false)
+            {
+                lifeline_extratime = true;
+                cout << "You got 10 extra seconds " << endl;
+            }
+            else if (choice == 5)
+            {
+                cout << "  you selected not to choose any lifeline  ";
+                cout << endl;
+            }
+            else
+            {
+                cout << "You already used this lifeline " << endl;
             }
         }
-
-        else if (choice == 2 && lifeline_skip == false)
-        {
-            lifeline_skip = true;
-            cout << "The question is skipped successfully " << endl;
-            return;
-        }
-        else if (choice == 3 && lifeline_replace_question == false)
-        {
-            lifeline_replace_question = true;
-            r = rand() % 10;
-            cout << "--------------------------------------" << endl;
-            cout << Questions[r] << endl;
-            cout << "1. " << OptA[r] << endl;
-            cout << "2. " << OptB[r] << endl;
-            cout << "3. " << OptC[r] << endl;
-            cout << "4. " << OptD[r] << endl;
-        }
-        else if (choice == 4 && lifeline_extratime == false)
-        {
-            lifeline_extratime = true;
-            cout << "You got 10 extra seconds " << endl;
-        }
-        else if (choice == 5)
-        {
-            cout << "  you selected not to choose any lifeline  ";
-            cout << endl;
-        }
+        else
+            cout << "You choose not to use any lifeline " << endl;
         userans = getValidatedInput(1, 4);
         if (userans == answer[r])
         {
