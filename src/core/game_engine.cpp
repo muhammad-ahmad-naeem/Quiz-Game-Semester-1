@@ -525,7 +525,41 @@ void Computerquestionsmid(int& highscore)   //medium level questions
 
 void Computerquestionshard(int& highscore)   //hard level questions
 {
-
+    srand(time(0));
+    ifstream file("computerhard.txt");
+    if (!file)
+        cout << "ERROR: File Not found" << endl;
+    else
+    {
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+        int answer[10];
+        for (int i = 0; i < 10; i++)
+        {
+            getline(file, Questions[i]);
+            getline(file, OptA[i]);
+            getline(file, OptB[i]);
+            getline(file, OptC[i]);
+            getline(file, OptD[i]);
+            file >> answer[i];
+            file.ignore();
+        }
+        int r = rand() % 10, userans;
+        cout << "--------------------------------------" << endl;
+        cout << Questions[r] << endl;
+        cout << "1. " << OptA[r] << endl;
+        cout << "2. " << OptB[r] << endl;
+        cout << "3. " << OptC[r] << endl;
+        cout << "4. " << OptD[r] << endl;
+        cout << "Enter your Answer = ";
+        userans = getValidatedInput(1, 4);
+        if (userans == answer[r])
+        {
+            cout << "Your Answer is Correct" << endl;
+            highscore++;
+        }
+        else
+            cout << "Your Answer is Incorrect" << endl;
+    }
 }
 
 
