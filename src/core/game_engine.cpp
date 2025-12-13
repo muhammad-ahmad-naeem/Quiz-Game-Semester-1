@@ -7,6 +7,14 @@
 #include <ctime>
 #include <cstring>
 using namespace std;
+const int MAX_WRONG = 500;
+
+int wrongIndex[MAX_WRONG];        // question index r
+int wrongType[MAX_WRONG];         // which subject+level
+int wrongUserAns[MAX_WRONG];      // user answer
+int wrongCorrectAns[MAX_WRONG];   // correct answer
+int wrongCount = 0;
+
 
 // Lifelines
 bool lifeline_5050 = false;
@@ -39,12 +47,14 @@ void Logicquestionshard(int& highscore);
 void savePlayerScore(const char* name, int score);
 void showTopPlayers();
 
+void reviewWrongQuestions();
+void loadQuestionsFromFile(const string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10]);
 //global variables
 int correctAnswers = 0;
 int wrongAnswers = 0;
 int getValidatedInput(int minOption, int maxOption)
 {
-   
+
     int input;
     while (true)
     {
@@ -90,9 +100,9 @@ string getCurrentDateTime()
 
 
 // Save quiz session log to file with date
-void saveQuizLog(const char* playerName, int score) 
+void saveQuizLog(const char* playerName, int score)
 {
-    
+
     ofstream logfile("quiz_logs.txt", ios::app);
     if (logfile.is_open())
     {
@@ -294,11 +304,23 @@ int main()
                 }
 
             } while (input3 != 4);
+            if (wrongCount > 0)
+            {
+                char ch;
+                cout << "Do you want to review wrong questions? (y/n): ";
+                cin >> ch;
+                if (ch == 'y' || ch == 'Y')
+                {
+                    reviewWrongQuestions();
+                }
+                wrongCount = 0;    // for new game session
+            }
             break;
         }
     }
     return 0;
 }
+
 
 // ----------------------- MENU FUNCTIONS -----------------------
 void mainmenue()
@@ -413,6 +435,84 @@ void showTopPlayers()
     system("cls");
 
 }
+void loadQuestionsFromFile(string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10])
+{
+    ifstream file(filename);
+    if (!file)
+    {
+        cout << "ERROR: File not found: " << filename << endl;
+        return;
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        getline(file, Questions[i]);
+        getline(file, OptA[i]);
+        getline(file, OptB[i]);
+        getline(file, OptC[i]);
+        getline(file, OptD[i]);
+        file >> answer[i];
+        file.ignore();
+    }
+    file.close();
+}
+
+void reviewWrongQuestions()
+{
+    if (wrongCount == 0)
+    {
+        cout << "No wrong answers to review.\n";
+        return;
+    }
+
+    cout << "\n===== Review Wrong Questions =====\n";
+
+    string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
+    int answer[10];
+
+    for (int i = 0; i < wrongCount; ++i)
+    {
+        int idx = wrongIndex[i];  // r for that question
+        int type = wrongType[i];
+
+        string filename;
+
+        if (type == 1)  filename = "science.txt";
+        if (type == 2)  filename = "sciencemid.txt";
+        if (type == 3)  filename = "sciencehard.txt";
+        if (type == 4)  filename = "computer.txt";
+        if (type == 5)  filename = "computermid.txt";
+        if (type == 6)  filename = "computerhard.txt";
+        if (type == 7)  filename = "sports.txt";
+        if (type == 8)  filename = "sportsmid.txt";
+        if (type == 9)  filename = "sportshard.txt";
+        if (type == 10) filename = "history.txt";
+        if (type == 11) filename = "historymid.txt";
+        if (type == 12) filename = "historyhard.txt";
+        if (type == 13) filename = "iq.txt";
+        if (type == 14) filename = "iqmid.txt";
+        if (type == 15) filename = "iqhard.txt";
+
+        if (filename.empty())
+            continue;
+
+        loadQuestionsFromFile(filename, Questions, OptA, OptB, OptC, OptD, answer);
+
+        if (idx < 0 || idx >= 10)
+            continue;
+
+        cout << "\nQuestion " << (i + 1) << ": " << Questions[idx] << "\n";
+        cout << "1. " << OptA[idx] << "\n";
+        cout << "2. " << OptB[idx] << "\n";
+        cout << "3. " << OptC[idx] << "\n";
+        cout << "4. " << OptD[idx] << "\n";
+        cout << "Your answer: " << wrongUserAns[i] << "\n";
+        cout << "Correct answer: " << wrongCorrectAns[i] << "\n";
+    }
+
+    cout << endl;
+}
+
 
 
 
@@ -597,6 +697,11 @@ void Sciencequestions(int& highscore)   //easy level questions
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 1;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -782,6 +887,11 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 2;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -968,6 +1078,11 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 3;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -1157,6 +1272,11 @@ void Computerquestions(int& highscore)   //easy level questions
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 4;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -1342,6 +1462,11 @@ void Computerquestionsmid(int& highscore)   //medium level questions
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 5;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -1527,6 +1652,11 @@ void Computerquestionshard(int& highscore)   //hard level questions
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 6;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -1717,6 +1847,11 @@ void Sportsquestions(int& highscore)   //easy level questions
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 7;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -1902,6 +2037,11 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 8;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -2087,6 +2227,11 @@ void Sportsquestionshard(int& highscore)   //hard level questions
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 9;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -2277,6 +2422,11 @@ void Historyquestions(int& highscore)   //easy level questions
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 10;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -2462,6 +2612,11 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 11;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -2647,6 +2802,11 @@ void Historyquestionshard(int& highscore)   //hard level questions
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 12;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -2837,6 +2997,11 @@ void Logicquestions(int& highscore)   //easy level questions
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 13;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -3022,6 +3187,11 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 4;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
@@ -3207,6 +3377,11 @@ void Logicquestionshard(int& highscore)   //hard level question
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
+            wrongIndex[wrongCount] = r;
+            wrongType[wrongCount] = 15;
+            wrongUserAns[wrongCount] = userans;
+            wrongCorrectAns[wrongCount] = answer[r];
+            wrongCount++;
         }
 
     }
