@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -14,7 +15,7 @@ int wrongType[MAX_WRONG];         // which subject+level
 int wrongUserAns[MAX_WRONG];      // user answer
 int wrongCorrectAns[MAX_WRONG];   // correct answer
 int wrongCount = 0;
-
+int replayAfterReview();        //replay questions
 
 // Lifelines
 bool lifeline_5050 = false;
@@ -52,6 +53,7 @@ void loadQuestionsFromFile(const string filename, string Questions[10], string O
 //global variables
 int correctAnswers = 0;
 int wrongAnswers = 0;
+bool replayHardDirect = false;
 int getValidatedInput(int minOption, int maxOption)
 {
 
@@ -180,8 +182,17 @@ int main()
 
     while (true)
     {
-        mainmenue();
-        input = getValidatedInput(1, 4); // Updated to include Top 5
+        if (!replayHardDirect)
+        {
+            mainmenue();
+            input = getValidatedInput(1, 4);
+        }
+        else
+        {
+            input = 1;          // Start Game
+            input3 = 3;         // Hard
+            replayHardDirect = false;
+        } // Updated to include Top 5
         system("cls");
         if (input == 3)
         {
@@ -309,16 +320,43 @@ int main()
                 char ch;
                 cout << "Do you want to review wrong questions? (y/n): ";
                 cin >> ch;
+
                 if (ch == 'y' || ch == 'Y')
                 {
                     reviewWrongQuestions();
+
+                    int choice = replayAfterReview();
+
+                    wrongCount = 0;   // reset after review
+
+                    if (choice == 1)
+                    {
+                        replayHardDirect = true;
+                        continue;
+                    }
+                    else
+                    {
+                        exit(0);
+                    }
                 }
-                wrongCount = 0;    // for new game session
+                wrongCount = 0;
             }
             break;
         }
     }
     return 0;
+}
+
+int replayAfterReview()
+{
+    char ch;
+    cout << "\nDo you want to replay questions? (y/n): ";
+    cin >> ch;
+
+    if (ch == 'y' || ch == 'Y')
+        return 1;   // replay → difficulty menu
+    else
+        return -1;  // exit game
 }
 
 
