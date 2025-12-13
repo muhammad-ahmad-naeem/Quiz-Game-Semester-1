@@ -5,11 +5,16 @@
 #include <fstream>
 #include <conio.h>
 #include <ctime>
+#include <cstring>
 using namespace std;
+
+// Lifelines
 bool lifeline_5050 = false;
 bool lifeline_skip = false;
 bool lifeline_replace_question = false;
 bool lifeline_extratime = false;
+
+// Function declarations
 void liflines_system();
 void mainmenue();
 void submenue();
@@ -17,22 +22,22 @@ void diffcultymenue();
 void Sciencequestions(int& highscore);
 void Sciencequestionsmid(int& highscore);
 void Sciencequestionshard(int& highscore);
-
 void Computerquestions(int& highscore);
 void Computerquestionsmid(int& highscore);
 void Computerquestionshard(int& highscore);
-
 void Sportsquestions(int& highscore);
 void Sportsquestionsmid(int& highscore);
 void Sportsquestionshard(int& highscore);
-
 void Historyquestions(int& highscore);
 void Historyquestionsmid(int& highscore);
 void Historyquestionshard(int& highscore);
-
 void Logicquestions(int& highscore);
 void Logicquestionsmid(int& highscore);
 void Logicquestionshard(int& highscore);
+
+// Player functions
+void savePlayerScore(const char* name, int score);
+void showTopPlayers();
 
 int getValidatedInput(int minOption, int maxOption)
 {
@@ -52,13 +57,36 @@ int getValidatedInput(int minOption, int maxOption)
     return input;
 }
 
+// Get current date in DD-MM-YYYY format
+string getCurrentDate() {
+    time_t now = time(0);
+    tm ltm;                       // create tm object (not pointer)
+    localtime_s(&ltm, &now);
+    char buf[20];
+    sprintf_s(buf, "%02d-%02d-%04d", ltm.tm_mday, ltm.tm_mon + 1, 1900 + ltm.tm_year);
+    return string(buf);
+}
+
+
+// Save quiz session log to file with date
+void saveQuizLog(const char* playerName, int score) {
+    ofstream logfile("quiz_log.txt", ios::app);
+    if (logfile.is_open()) {
+        string date = getCurrentDate();
+        logfile << "Name: " << playerName
+            << " | Score: " << score
+            << " | Date: " << date
+            << endl;
+        logfile.close();
+    }
+}
+
 int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
 {
     time_t start = time(0);
     string buffer;
     cout << " (You have " << timeLimitSeconds << " seconds) " << flush;
     cout << endl;
-
     while (true)
     {
         double elapsed = difftime(time(0), start);
@@ -68,10 +96,8 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
             cout << "   Time is up!" << endl;
             cout << "-----------------" << endl;
             cout << endl;
-
             return -1;
         }
-
         if (_kbhit())
         {
             char ch = _getch();
@@ -111,25 +137,40 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
 
 int main()
 {
+    char playerName[50];
+    cout << "Enter your name: ";
+    cin.getline(playerName, 50);
+
     int input, input1, input3, highscore = 0;
+    system("cls");
     cout << "====================================" << endl;
     cout << "      Welcome to Quiz game          " << endl;
     cout << "------------------------------------" << endl;
+
     while (true)
     {
         mainmenue();
-        input = getValidatedInput(1, 3);
+        input = getValidatedInput(1, 4); // Updated to include Top 5
         system("cls");
         if (input == 3)
+        {
+            savePlayerScore(playerName, highscore); // Save score on exit
+            saveQuizLog(playerName, highscore);
             break;
+        }
         if (input == 2)
         {
-            cout << "High score = " << highscore << endl << endl;
+            cout << "High score = " << highscore << endl;
+            cout << "Your score = " << highscore << endl;
+            continue;
+        }
+        if (input == 4)
+        {
+            showTopPlayers();
             continue;
         }
         switch (input)
         {
-
         case 1:
             do
             {
@@ -166,7 +207,7 @@ int main()
                             break;
                         }
                     } while (input1 != 6);
-                    break;                         //east tier questions end here
+                    break;
 
                 case 2:
                     cout << "Select from the topic below" << endl;
@@ -175,7 +216,6 @@ int main()
                         submenue();
                         input1 = getValidatedInput(1, 6);
                         switch (input1)
-
                         {
                         case 1:
                             Sciencequestionsmid(highscore);
@@ -196,8 +236,7 @@ int main()
                             break;
                         }
                     } while (input1 != 6);
-                    break;                            //MID Tier Question end here
-
+                    break;
 
                 case 3:
                     cout << "Select from the topic below" << endl;
@@ -226,7 +265,8 @@ int main()
                             break;
                         }
                     } while (input1 != 6);
-                    break;                            //hard tier questions end here
+                    break;
+
                 case 4:
                     input = 0;
                     break;
@@ -236,15 +276,19 @@ int main()
             break;
         }
     }
+    return 0;
 }
 
+// ----------------------- MENU FUNCTIONS -----------------------
 void mainmenue()
 {
-    cout << endl << "MAIN MENUE" << endl;
+
+    cout << "   MAIN MENUE" << endl;
     cout << endl;
     cout << "Enter 1 ==>  Start Game" << endl;
     cout << "Enter 2 ==>  High Scores" << endl;
     cout << "Enter 3 ==>  Exit Game" << endl;
+    cout << "Enter 4 ==>  Top 5 Players" << endl; // New
     cout << "--------------------------------------" << endl;
 }
 
@@ -271,6 +315,7 @@ void diffcultymenue()
     cout << "Enter 4 ==>  GO TO MAIN MENU" << endl;
     cout << endl;
 }
+
 void liflines_system()
 {
     cout << "\n========================================\n";
@@ -284,6 +329,70 @@ void liflines_system()
     cout << "----------------------------------------\n";
     cout << " Choose your lifeline (1-5): ";
 }
+
+// ----------------------- PLAYER FUNCTIONS -----------------------
+void savePlayerScore(const char* name, int score)
+{
+    ofstream file("players_scores.txt", ios::app);
+    if (file.is_open())
+    {
+        file << name << " " << score << endl;
+        file.close();
+    }
+}
+
+void showTopPlayers()
+{
+    const int MAX_PLAYERS = 100;
+    char names[MAX_PLAYERS][50];
+    int scores[MAX_PLAYERS];
+    int count = 0;
+    ifstream file("players_scores.txt");
+    if (!file)
+    {
+        cout << "No scores found!" << endl;
+        return;
+    }
+    while (file >> names[count] >> scores[count])
+    {
+        count++;
+        if (count >= MAX_PLAYERS) break;
+    }
+    file.close();
+
+    // Bubble sort for top scores
+    for (int i = 0; i < count - 1; i++)
+    {
+        for (int j = i + 1; j < count; j++)
+        {
+            if (scores[i] < scores[j])
+            {
+                int tempScore = scores[i];
+                scores[i] = scores[j];
+                scores[j] = tempScore;
+
+                char tempName[50];
+                strcpy_s(tempName, names[i]);
+                strcpy_s(names[i], names[j]);
+                strcpy_s(names[j], tempName);
+            }
+        }
+    }
+    cout << "\n===== TOP 5 PLAYERS =====\n";
+    cout << "Rank   Name        Score\n";
+    cout << "------------------------\n";
+    for (int i = 0; i < count && i < 5; i++)
+    {
+        cout << i + 1 << "      " << names[i] << "        " << scores[i] << endl;
+    }
+    cout << "=========================\n";
+    cout << " enter any key to enter Main Menue = ";
+    int a;
+    cin >> a;
+    system("cls");
+
+}
+
 
 
 //questions for sciences
@@ -468,6 +577,7 @@ void Sciencequestions(int& highscore)   //easy level questions
         else
         {
             cout << " <<Your Answer is Incorrect>>" << endl;
+            highscore--;
             cout << endl;
         }
 
