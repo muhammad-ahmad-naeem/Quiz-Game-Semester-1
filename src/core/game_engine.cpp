@@ -7,6 +7,8 @@
 #include <conio.h>
 #include <ctime>
 #include <cstring>
+#include <windows.h>
+
 using namespace std;
 const int MAX_WRONG = 500;
 
@@ -48,6 +50,9 @@ void Logicquestionshard(int& highscore);
 void savePlayerScore(const char* name, int score);
 void showTopPlayers();
 
+void setColor(int color);
+
+
 void reviewWrongQuestions();
 void loadQuestionsFromFile(const string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10]);
 //global variables
@@ -72,6 +77,12 @@ int getValidatedInput(int minOption, int maxOption)
     }
     return input;
 }
+
+void setColor(int color)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
 
 // Get current date in DD-MM-YYYY format
 string getCurrentDate() {
@@ -125,9 +136,14 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
         double elapsed = difftime(time(0), start);
         if (elapsed >= timeLimitSeconds)
         {
+
+            setColor(12);
             cout << "-----------------" << endl;
+            setColor(15);
             cout << "   Time is up!" << endl;
+            setColor(12);
             cout << "-----------------" << endl;
+            setColor(7);
             cout << endl;
             return -1;
         }
@@ -146,7 +162,9 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
                     }
                     else
                     {
+                        setColor(4);
                         cout << "\nError: invalid option. Try again: " << flush;
+                        setColor(7);
                         buffer.clear();
                     }
                 }
@@ -176,9 +194,13 @@ int main()
 
     int input, input1, input3, highscore = 0;
     system("cls");
+    setColor(11);
     cout << "====================================" << endl;
+    setColor(15);
     cout << "      Welcome to Quiz game          " << endl;
+    setColor(11);
     cout << "------------------------------------" << endl;
+    setColor(7);
 
     while (true)
     {
@@ -222,7 +244,9 @@ int main()
                 switch (input3)
                 {
                 case 1:
+                    setColor(11);
                     cout << "Select from the topic below" << endl;
+                    setColor(7);
                     do
                     {
                         submenue();
@@ -252,11 +276,14 @@ int main()
                     break;
 
                 case 2:
+                    setColor(11);
                     cout << "Select from the topic below" << endl;
+                    setColor(7);
                     do
                     {
                         submenue();
                         input1 = getValidatedInput(1, 6);
+                        system("cls");
                         switch (input1)
                         {
                         case 1:
@@ -281,11 +308,14 @@ int main()
                     break;
 
                 case 3:
+                    setColor(11);
                     cout << "Select from the topic below" << endl;
+                    setColor(7);
                     do
                     {
                         submenue();
                         input1 = getValidatedInput(1, 6);
+                        system("cls");
                         switch (input1)
                         {
                         case 1:
@@ -363,14 +393,17 @@ int replayAfterReview()
 // ----------------------- MENU FUNCTIONS -----------------------
 void mainmenue()
 {
-
-    cout << "   MAIN MENUE" << endl;
+    setColor(14);
+    cout << "   <<MAIN MENUE>>" << endl;
+    setColor(7);
     cout << endl;
     cout << "Enter 1 ==>  Start Game" << endl;
     cout << "Enter 2 ==>  High Scores" << endl;
     cout << "Enter 3 ==>  Exit Game" << endl;
-    cout << "Enter 4 ==>  Top 5 Players" << endl; // New
-    cout << "--------------------------------------" << endl;
+    cout << "Enter 4 ==>  Top 5 Players" << endl;
+    setColor(11);
+    cout << "------------------------------------" << endl;
+    setColor(7);
 }
 
 void submenue()
@@ -381,33 +414,48 @@ void submenue()
     cout << "Enter 3 ==>  Sports" << endl;
     cout << "Enter 4 ==>  History" << endl;
     cout << "Enter 5 ==>  IQ/Logic" << endl;
+    setColor(14);
     cout << "Enter 6 ==>  GO TO DIFFICULTY MENU" << endl;
+    setColor(7);
     cout << endl;
 }
 
 void diffcultymenue()
 {
     cout << endl;
+    setColor(13);
     cout << "  Difficulty Selection  " << endl;
+    setColor(11);
     cout << "------------------------" << endl;
+    setColor(10);
     cout << "Enter 1 ==>  Easy" << endl;
+    setColor(3);
     cout << "Enter 2 ==>  Medium" << endl;
+    setColor(12);
     cout << "Enter 3 ==>  Hard" << endl;
+    setColor(14);
     cout << "Enter 4 ==>  GO TO MAIN MENU" << endl;
+    setColor(7);
     cout << endl;
 }
 
 void liflines_system()
 {
+    setColor(11);
     cout << "\n========================================\n";
+    setColor(14);
     cout << "           LIFELINES MENU\n";
+    setColor(11);
     cout << "========================================\n";
+    setColor(7);
     cout << " 1) 50/50          -> removes two wrong options\n";
     cout << " 2) Skip Question  -> skip without penalty\n";
     cout << " 3) Replace        -> get a completely new question\n";
     cout << " 4) Extra Time     -> +10 seconds for this question\n";
     cout << " 5) No Lifeline    -> answer without using any help\n";
+    setColor(11);
     cout << "----------------------------------------\n";
+    setColor(7);
     cout << " Choose your lifeline (1-5): ";
 }
 
@@ -459,15 +507,21 @@ void showTopPlayers()
             }
         }
     }
+    setColor(14);
     cout << "\n===== TOP 5 PLAYERS =====\n";
+    setColor(11);
     cout << "Rank   Name        Score\n";
     cout << "------------------------\n";
+    setColor(7);
     for (int i = 0; i < count && i < 5; i++)
     {
         cout << i + 1 << "      " << names[i] << "        " << scores[i] << endl;
     }
+    setColor(11);
     cout << "=========================\n";
+    setColor(10);
     cout << " enter any key to enter Main Menue = ";
+    setColor(7);
     int a;
     cin >> a;
     system("cls");
@@ -499,11 +553,14 @@ void reviewWrongQuestions()
 {
     if (wrongCount == 0)
     {
+        setColor(10);
         cout << "No wrong answers to review.\n";
+        setColor(7);
         return;
     }
-
+    setColor(11);
     cout << "\n===== Review Wrong Questions =====\n";
+    setColor(7);
 
     string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
     int answer[10];
@@ -538,14 +595,18 @@ void reviewWrongQuestions()
 
         if (idx < 0 || idx >= 10)
             continue;
-
+        setColor(11);
         cout << "\nQuestion " << (i + 1) << ": " << Questions[idx] << "\n";
+        setColor(7);
         cout << "1. " << OptA[idx] << "\n";
         cout << "2. " << OptB[idx] << "\n";
         cout << "3. " << OptC[idx] << "\n";
         cout << "4. " << OptD[idx] << "\n";
+        setColor(12);
         cout << "Your answer: " << wrongUserAns[i] << "\n";
+        setColor(10);
         cout << "Correct answer: " << wrongCorrectAns[i] << "\n";
+        setColor(7);
     }
 
     cout << endl;
@@ -579,14 +640,19 @@ void Sciencequestions(int& highscore)   //easy level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -626,7 +692,9 @@ void Sciencequestions(int& highscore)   //easy level questions
                         continue;
 
                 }
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 for (int j = 1; j <= 4; j++)
                 {
                     if (allowed[j] == 0)
@@ -644,15 +712,20 @@ void Sciencequestions(int& highscore)   //easy level questions
             else if (choice == 2 && lifeline_skip == false)
             {
                 lifeline_skip = true;
+                setColor(2);
                 cout << "The question is skipped successfully " << endl;
+                setColor(7);
                 return;
             }
             else if (choice == 3 && lifeline_replace_question == false)
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -662,9 +735,13 @@ void Sciencequestions(int& highscore)   //easy level questions
             {
                 lifeline_extratime = true;
                 extraSeconds += 10;
+                setColor(3);
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -673,10 +750,14 @@ void Sciencequestions(int& highscore)   //easy level questions
             }
             else if (choice == 5)
             {
+                setColor(3);
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -685,9 +766,13 @@ void Sciencequestions(int& highscore)   //easy level questions
             }
             else
             {
+                setColor(3);
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -705,14 +790,18 @@ void Sciencequestions(int& highscore)   //easy level questions
         userans = getTimedAnswer(1, 4, timeForThis);
         if (userans == -1)
         {
+            setColor(12);
             cout << " << You failed to answer in time. >>" << endl;
+            setColor(7);
         }
         else
         {
             if (allowed[userans] == 0)
             {
                 cout << endl;
+                setColor(12);
                 cout << "That option was removed by 50/50 lifeline. Incorrect." << endl;
+                setColor(7);
             }
             else
             {
@@ -723,15 +812,23 @@ void Sciencequestions(int& highscore)   //easy level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(14);
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
@@ -740,6 +837,8 @@ void Sciencequestions(int& highscore)   //easy level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -917,6 +1016,8 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -930,6 +1031,8 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -1108,6 +1211,8 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -1121,6 +1226,8 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -1302,6 +1409,8 @@ void Computerquestions(int& highscore)   //easy level questions
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -1315,6 +1424,8 @@ void Computerquestions(int& highscore)   //easy level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -1492,6 +1603,8 @@ void Computerquestionsmid(int& highscore)   //medium level questions
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -1505,6 +1618,8 @@ void Computerquestionsmid(int& highscore)   //medium level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -1682,6 +1797,8 @@ void Computerquestionshard(int& highscore)   //hard level questions
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -1695,6 +1812,8 @@ void Computerquestionshard(int& highscore)   //hard level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -1877,6 +1996,8 @@ void Sportsquestions(int& highscore)   //easy level questions
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -1890,6 +2011,8 @@ void Sportsquestions(int& highscore)   //easy level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -2067,6 +2190,8 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -2080,6 +2205,8 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -2257,6 +2384,8 @@ void Sportsquestionshard(int& highscore)   //hard level questions
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -2270,6 +2399,8 @@ void Sportsquestionshard(int& highscore)   //hard level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -2452,6 +2583,8 @@ void Historyquestions(int& highscore)   //easy level questions
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -2465,6 +2598,8 @@ void Historyquestions(int& highscore)   //easy level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -2642,6 +2777,8 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -2655,6 +2792,8 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -2832,6 +2971,8 @@ void Historyquestionshard(int& highscore)   //hard level questions
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -2845,6 +2986,8 @@ void Historyquestionshard(int& highscore)   //hard level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -3027,6 +3170,8 @@ void Logicquestions(int& highscore)   //easy level questions
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -3040,6 +3185,8 @@ void Logicquestions(int& highscore)   //easy level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -3217,6 +3364,8 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -3230,6 +3379,8 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
@@ -3407,6 +3558,8 @@ void Logicquestionshard(int& highscore)   //hard level question
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
+            system("pause");
+            system("cls");
         }
         else
         {
@@ -3420,6 +3573,8 @@ void Logicquestionshard(int& highscore)   //hard level question
             wrongUserAns[wrongCount] = userans;
             wrongCorrectAns[wrongCount] = answer[r];
             wrongCount++;
+            system("pause");
+            system("cls");
         }
 
     }
