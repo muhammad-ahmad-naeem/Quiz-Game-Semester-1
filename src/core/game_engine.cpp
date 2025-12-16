@@ -619,32 +619,32 @@ void reviewWrongQuestions()
 //questions for sciences
 void Sciencequestions(int& highscore)   //easy level questions
 {
-    srand(time(0));
-    ifstream file("science.txt");
+    srand(time(0)); // seed random generator
+    ifstream file("science.txt");// open science questions file
     if (!file)
-        cout << "ERROR: File Not found" << endl;
+        cout << "ERROR: File Not found" << endl;// file error
     else
     {
-        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];
-        int answer[10];
+        string Questions[10], OptA[10], OptB[10], OptC[10], OptD[10];// store questions & options
+        int answer[10];// correct answers
         for (int i = 0; i < 10; i++)
         {
-            getline(file, Questions[i]);
-            getline(file, OptA[i]);
-            getline(file, OptB[i]);
-            getline(file, OptC[i]);
-            getline(file, OptD[i]);
-            file >> answer[i];
-            file.ignore();
+            getline(file, Questions[i]);// read question
+            getline(file, OptA[i]); // option A
+            getline(file, OptB[i]); // option B
+            getline(file, OptC[i]); // option C
+            getline(file, OptD[i]); // option D
+            file >> answer[i];// correct option number
+            file.ignore();// clear buffer
         }
-        int r = rand() % 10;
-        int userans = 0;
+        int r = rand() % 10; // select random question
+        int userans = 0;// user answer
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
         setColor(11);
         cout << "--------------------------------------" << endl;
         setColor(14);
-        cout << Questions[r] << endl;
+        cout << Questions[r] << endl; // display question
         setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
@@ -652,7 +652,7 @@ void Sciencequestions(int& highscore)   //easy level questions
         cout << "4. " << OptD[r] << endl;
         cout << endl;
         setColor(10);
-        cout << "==> Do you want to use your lifelines (y/n) =  ";
+        cout << "==> Do you want to use your lifelines (y/n) =  ";// lifeline prompt
         setColor(7);
         char user_choice;
 
@@ -660,7 +660,7 @@ void Sciencequestions(int& highscore)   //easy level questions
         if (user_choice == 'y')
         {
             system("cls");
-            liflines_system();
+            liflines_system();// show lifelines menu
             int choice;
             cout << " " << endl;
             cout << "Enter your choice = ";
@@ -668,7 +668,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             system("cls");
             if (choice == 1 && lifeline_5050 == false)
             {
-                lifeline_5050 = true;
+                lifeline_5050 = true;// mark lifeline used
                 cout << " " << endl;
                 cout << "Two option removed " << endl;
                 int correct = answer[r];
@@ -683,7 +683,7 @@ void Sciencequestions(int& highscore)   //easy level questions
                         continue;
                     if (remove < 2)
                     {
-                        allowed[i] = 0;
+                        allowed[i] = 0;// remove wrong options
                         remove++;
                     }
                 }
@@ -694,7 +694,7 @@ void Sciencequestions(int& highscore)   //easy level questions
 
                 }
                 setColor(14);
-                cout << Questions[r] << endl;
+                cout << Questions[r] << endl;// show question again
                 setColor(7);
                 for (int j = 1; j <= 4; j++)
                 {
@@ -714,14 +714,14 @@ void Sciencequestions(int& highscore)   //easy level questions
             {
                 lifeline_skip = true;
                 setColor(2);
-                cout << "The question is skipped successfully " << endl;
+                cout << "The question is skipped successfully " << endl;// skip question
                 setColor(7);
                 return;
             }
             else if (choice == 3 && lifeline_replace_question == false)
             {
                 lifeline_replace_question = true;
-                r = rand() % 10;
+                r = rand() % 10;// new question
                 setColor(11);
                 cout << "--------------------------------------" << endl;
                 setColor(14);
@@ -735,7 +735,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             else if (choice == 4 && lifeline_extratime == false)
             {
                 lifeline_extratime = true;
-                extraSeconds += 10;
+                extraSeconds += 10;// add time
                 setColor(3);
                 cout << "You got 10 extra seconds " << endl;
                 setColor(11);
@@ -768,7 +768,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             else
             {
                 setColor(3);
-                cout << "You already used this lifeline " << endl;
+                cout << "You already used this lifeline " << endl;// lifeline already used
                 setColor(11);
                 cout << "--------------------------------------" << endl;
                 setColor(14);
@@ -785,14 +785,14 @@ void Sciencequestions(int& highscore)   //easy level questions
         else
         {
             cout << " " << endl;
-            cout << " You choose not to use any lifeline " << endl;
+            cout << " You choose not to use any lifeline " << endl;// no lifeline
         }
-        int timeForThis = 10 + extraSeconds;
-        userans = getTimedAnswer(1, 4, timeForThis);
+        int timeForThis = 10 + extraSeconds;// final time
+        userans = getTimedAnswer(1, 4, timeForThis);// timed input
         if (userans == -1)
         {
             setColor(12);
-            cout << " << You failed to answer in time. >>" << endl;
+            cout << " << You failed to answer in time. >>" << endl;// timeout
             setColor(7);
         }
         else
