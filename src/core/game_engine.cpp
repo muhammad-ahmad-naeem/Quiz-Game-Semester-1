@@ -1,3 +1,4 @@
+#include<iostream>
 
 #include <iostream>
 #include <cmath>
@@ -868,14 +869,19 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -940,8 +946,11 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -952,8 +961,11 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -964,8 +976,11 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -975,8 +990,11 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1012,7 +1030,9 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
@@ -1021,8 +1041,11 @@ void Sciencequestionsmid(int& highscore)   //meduim level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
@@ -1063,14 +1086,19 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 };       // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0;                     // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -1135,8 +1163,11 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1147,8 +1178,11 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1159,8 +1193,11 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1170,8 +1207,11 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1207,7 +1247,9 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
@@ -1216,8 +1258,11 @@ void Sciencequestionshard(int& highscore)   //Hard level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
@@ -1261,14 +1306,19 @@ void Computerquestions(int& highscore)   //easy level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -1345,8 +1395,11 @@ void Computerquestions(int& highscore)   //easy level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1357,8 +1410,11 @@ void Computerquestions(int& highscore)   //easy level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1368,8 +1424,11 @@ void Computerquestions(int& highscore)   //easy level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1405,7 +1464,9 @@ void Computerquestions(int& highscore)   //easy level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
@@ -1414,8 +1475,11 @@ void Computerquestions(int& highscore)   //easy level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
@@ -1455,14 +1519,19 @@ void Computerquestionsmid(int& highscore)   //medium level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -1527,8 +1596,11 @@ void Computerquestionsmid(int& highscore)   //medium level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1539,8 +1611,11 @@ void Computerquestionsmid(int& highscore)   //medium level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1551,8 +1626,11 @@ void Computerquestionsmid(int& highscore)   //medium level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1562,8 +1640,11 @@ void Computerquestionsmid(int& highscore)   //medium level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1599,7 +1680,9 @@ void Computerquestionsmid(int& highscore)   //medium level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
@@ -1608,8 +1691,11 @@ void Computerquestionsmid(int& highscore)   //medium level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
@@ -1649,14 +1735,19 @@ void Computerquestionshard(int& highscore)   //hard level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -1721,8 +1812,11 @@ void Computerquestionshard(int& highscore)   //hard level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1733,8 +1827,11 @@ void Computerquestionshard(int& highscore)   //hard level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1745,8 +1842,11 @@ void Computerquestionshard(int& highscore)   //hard level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1756,8 +1856,11 @@ void Computerquestionshard(int& highscore)   //hard level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1793,7 +1896,9 @@ void Computerquestionshard(int& highscore)   //hard level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
@@ -1802,8 +1907,11 @@ void Computerquestionshard(int& highscore)   //hard level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
@@ -1848,14 +1956,19 @@ void Sportsquestions(int& highscore)   //easy level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -1920,8 +2033,11 @@ void Sportsquestions(int& highscore)   //easy level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1932,8 +2048,11 @@ void Sportsquestions(int& highscore)   //easy level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1944,8 +2063,11 @@ void Sportsquestions(int& highscore)   //easy level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1955,8 +2077,11 @@ void Sportsquestions(int& highscore)   //easy level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -1992,7 +2117,9 @@ void Sportsquestions(int& highscore)   //easy level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
@@ -2001,8 +2128,11 @@ void Sportsquestions(int& highscore)   //easy level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
@@ -2042,14 +2172,19 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -2114,8 +2249,11 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2126,8 +2264,11 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2138,8 +2279,11 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2149,8 +2293,11 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2186,7 +2333,9 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
@@ -2195,8 +2344,11 @@ void Sportsquestionsmid(int& highscore)   //hard level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
@@ -2236,14 +2388,19 @@ void Sportsquestionshard(int& highscore)   //hard level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -2308,8 +2465,11 @@ void Sportsquestionshard(int& highscore)   //hard level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2320,8 +2480,11 @@ void Sportsquestionshard(int& highscore)   //hard level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2332,8 +2495,11 @@ void Sportsquestionshard(int& highscore)   //hard level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2343,8 +2509,11 @@ void Sportsquestionshard(int& highscore)   //hard level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2380,7 +2549,9 @@ void Sportsquestionshard(int& highscore)   //hard level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
@@ -2389,8 +2560,11 @@ void Sportsquestionshard(int& highscore)   //hard level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
@@ -2435,14 +2609,19 @@ void Historyquestions(int& highscore)   //easy level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -2507,8 +2686,11 @@ void Historyquestions(int& highscore)   //easy level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2519,8 +2701,11 @@ void Historyquestions(int& highscore)   //easy level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2531,8 +2716,11 @@ void Historyquestions(int& highscore)   //easy level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2542,8 +2730,11 @@ void Historyquestions(int& highscore)   //easy level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2579,7 +2770,9 @@ void Historyquestions(int& highscore)   //easy level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
@@ -2588,8 +2781,11 @@ void Historyquestions(int& highscore)   //easy level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
@@ -2629,14 +2825,19 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -2701,8 +2902,11 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2713,8 +2917,11 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2725,8 +2932,11 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2736,8 +2946,11 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2773,7 +2986,9 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
@@ -2782,8 +2997,11 @@ void Historyquestionsmid(int& highscore)   ///meduim level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
@@ -2823,14 +3041,19 @@ void Historyquestionshard(int& highscore)   //hard level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -2895,8 +3118,11 @@ void Historyquestionshard(int& highscore)   //hard level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2907,8 +3133,11 @@ void Historyquestionshard(int& highscore)   //hard level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2919,8 +3148,11 @@ void Historyquestionshard(int& highscore)   //hard level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2930,8 +3162,11 @@ void Historyquestionshard(int& highscore)   //hard level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -2967,7 +3202,9 @@ void Historyquestionshard(int& highscore)   //hard level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
@@ -2976,8 +3213,11 @@ void Historyquestionshard(int& highscore)   //hard level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
@@ -3022,14 +3262,19 @@ void Logicquestions(int& highscore)   //easy level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -3094,8 +3339,11 @@ void Logicquestions(int& highscore)   //easy level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3106,8 +3354,11 @@ void Logicquestions(int& highscore)   //easy level questions
                 lifeline_extratime = true;
                 extraSeconds += 10;
                 cout << "You got 10 extra seconds " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3118,8 +3369,11 @@ void Logicquestions(int& highscore)   //easy level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3129,8 +3383,11 @@ void Logicquestions(int& highscore)   //easy level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3166,7 +3423,9 @@ void Logicquestions(int& highscore)   //easy level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 2;
             correctAnswers++;
             cout << highscore;
@@ -3175,8 +3434,11 @@ void Logicquestions(int& highscore)   //easy level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
@@ -3216,14 +3478,19 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -3288,8 +3555,11 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3312,8 +3582,11 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3323,8 +3596,11 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3360,7 +3636,9 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 3;
             correctAnswers++;
             cout << highscore;
@@ -3369,8 +3647,11 @@ void Logicquestionsmid(int& highscore)   //meduim level questions
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 3;
             wrongAnswers++;
             cout << endl;
@@ -3410,14 +3691,19 @@ void Logicquestionshard(int& highscore)   //hard level question
         int userans = 0;
         int allowed[5] = { 0, 1, 1, 1, 1 }; // index 1..4 = allowed (1) or removed (0)
         int extraSeconds = 0; // extra seconds added by lifeline
+        setColor(11);
         cout << "--------------------------------------" << endl;
+        setColor(14);
         cout << Questions[r] << endl;
+        setColor(7);
         cout << "1. " << OptA[r] << endl;
         cout << "2. " << OptB[r] << endl;
         cout << "3. " << OptC[r] << endl;
         cout << "4. " << OptD[r] << endl;
         cout << endl;
+        setColor(10);
         cout << "==> Do you want to use your lifelines (y/n) =  ";
+        setColor(7);
         char user_choice;
 
         cin >> user_choice;
@@ -3482,8 +3768,11 @@ void Logicquestionshard(int& highscore)   //hard level question
             {
                 lifeline_replace_question = true;
                 r = rand() % 10;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3506,8 +3795,11 @@ void Logicquestionshard(int& highscore)   //hard level question
             {
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3517,8 +3809,11 @@ void Logicquestionshard(int& highscore)   //hard level question
             else
             {
                 cout << "You already used this lifeline " << endl;
+                setColor(11);
                 cout << "--------------------------------------" << endl;
+                setColor(14);
                 cout << Questions[r] << endl;
+                setColor(7);
                 cout << "1. " << OptA[r] << endl;
                 cout << "2. " << OptB[r] << endl;
                 cout << "3. " << OptC[r] << endl;
@@ -3554,7 +3849,9 @@ void Logicquestionshard(int& highscore)   //hard level question
         if (userans == answer[r])
         {
             cout << endl;
+            setColor(2);
             cout << "Your Answer is Correct" << endl;
+            setColor(7);
             highscore = highscore + 5;
             correctAnswers++;
             cout << highscore;
@@ -3563,8 +3860,11 @@ void Logicquestionshard(int& highscore)   //hard level question
         }
         else
         {
+            setColor(12);
             cout << " <<Your Answer is Incorrect.>>" << endl;
+            setColor(2);
             cout << "correct answer is = " << answer[r] << endl;
+            setColor(7);
             highscore = highscore - 5;
             wrongAnswers++;
             cout << endl;
