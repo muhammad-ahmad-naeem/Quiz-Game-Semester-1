@@ -1,5 +1,4 @@
 #include<iostream>
-
 #include <iostream>
 #include <cmath>
 #include <string>
@@ -21,10 +20,10 @@ int wrongCount = 0;
 int replayAfterReview();        //replay questions
 
 // Lifelines
-bool lifeline_5050 = false;
-bool lifeline_skip = false;
-bool lifeline_replace_question = false;
-bool lifeline_extratime = false;
+bool lifeline_5050 = false;// tracks whether the 50/50 lifeline has been used (false = not used yet)
+bool lifeline_skip = false; // tracks whether the skip question lifeline has been used
+bool lifeline_replace_question = false;// tracks whether the replace question lifeline has been used
+bool lifeline_extratime = false;// tracks whether the extra time lifeline has been used
 
 // Function declarations
 void liflines_system();
@@ -55,7 +54,7 @@ void setColor(int color);
 
 
 void reviewWrongQuestions();  // to reveiew wrong questions
-void loadQuestionsFromFile(const string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10]);
+void loadQuestionsFromFile(const string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10]); // function prototype to display and review all questions answered incorrectly by the player
 //global variables
 int correctAnswers = 0;
 int wrongAnswers = 0;
@@ -67,16 +66,16 @@ int getValidatedInput(int minOption, int maxOption)
     while (true)
     {
         cin >> input;
-        if (cin.fail() || input < minOption || input > maxOption)
+        if (cin.fail() || input < minOption || input > maxOption)// check for invalid input or out-of-range value
         {
-            cin.clear();
-            cin.ignore(10000, '\n');
+            cin.clear();// clear error flags from input stream
+            cin.ignore(10000, '\n'); // discard invalid input from buffer
             cout << "Error: Enter correct value" << endl;
         }
         else
             break;
     }
-    return input;
+    return input;// return validated input to calling function
 }
 
 void setColor(int color)
@@ -97,19 +96,19 @@ string getCurrentDate() {
 
 string getCurrentDateTime()
 {
-    time_t now = time(0);
-    tm ltm;
-    localtime_s(&ltm, &now);
+    time_t now = time(0);// get current time in seconds since Unix epoch
+    tm ltm;// structure to store local time components (day, month, year, hour, minute)
+    localtime_s(&ltm, &now); // convert current time to local time safely
 
     char buffer[40];
-    sprintf_s(buffer, "%02d-%02d-%04d %02d:%02d",
+    sprintf_s(buffer, "%02d-%02d-%04d %02d:%02d",// format: DD-MM-YYYY HH:MM
         ltm.tm_mday,
         ltm.tm_mon + 1,
         1900 + ltm.tm_year,
         ltm.tm_hour,
         ltm.tm_min);
 
-    return string(buffer);
+    return string(buffer); // convert char array to string and return it
 }
 
 
