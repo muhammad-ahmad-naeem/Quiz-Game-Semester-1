@@ -54,7 +54,7 @@ void showTopPlayers();
 void setColor(int color);
 
 
-void reviewWrongQuestions();
+void reviewWrongQuestions();  // to reveiew wrong questions
 void loadQuestionsFromFile(const string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10]);
 //global variables
 int correctAnswers = 0;
@@ -439,7 +439,7 @@ void diffcultymenue()
     setColor(7);
     cout << endl;
 }
-
+// function to print the options for lifelines
 void liflines_system()
 {
     setColor(11);
@@ -528,6 +528,7 @@ void showTopPlayers()
     system("cls");
 
 }
+// load question from the file using file name
 void loadQuestionsFromFile(string filename, string Questions[10], string OptA[10], string OptB[10], string OptC[10], string OptD[10], int answer[10])
 {
     ifstream file(filename);
@@ -549,7 +550,7 @@ void loadQuestionsFromFile(string filename, string Questions[10], string OptA[10
     }
     file.close();
 }
-
+// it will print the worng questions which user attempt wrong
 void reviewWrongQuestions()
 {
     if (wrongCount == 0)
@@ -568,8 +569,8 @@ void reviewWrongQuestions()
 
     for (int i = 0; i < wrongCount; ++i)
     {
-        int idx = wrongIndex[i];  // r for that question
-        int type = wrongType[i];
+        int idx = wrongIndex[i];  // r for that question // it is global array which store the index of wrong question
+        int type = wrongType[i];   // it will store the type like 1 for sceince.txt and so on
 
         string filename;
 
@@ -656,12 +657,12 @@ void Sciencequestions(int& highscore)   //easy level questions
         setColor(7);
         char user_choice;
 
-        cin >> user_choice;
+        cin >> user_choice;    // it will take user choice to decide user wants to take lifline or not
         if (user_choice == 'y')
         {
             system("cls");
             liflines_system();// show lifelines menu
-            int choice;
+            int choice;      // choice to select which lifline
             cout << " " << endl;
             cout << "Enter your choice = ";
             cin >> choice;
@@ -673,15 +674,15 @@ void Sciencequestions(int& highscore)   //easy level questions
                 cout << "Two option removed " << endl;
                 int correct = answer[r];
                 int remove = 0;
-                for (int i = 1; i <= 4; i++)
+                for (int i = 1; i <= 4; i++)   // it will store 1 in all elements in allowed
                 {
                     allowed[i] = 1; // ensure default
                 }
                 for (int i = 1; i <= 4; i++)
                 {
-                    if (i == correct)
+                    if (i == correct)     // if the answer == correct then ignore that value of i
                         continue;
-                    if (remove < 2)
+                    if (remove < 2)       // to ensure two options removed
                     {
                         allowed[i] = 0;// remove wrong options
                         remove++;
@@ -696,6 +697,7 @@ void Sciencequestions(int& highscore)   //easy level questions
                 setColor(14);
                 cout << Questions[r] << endl;// show question again
                 setColor(7);
+                // it will show the options other then removed one
                 for (int j = 1; j <= 4; j++)
                 {
                     if (allowed[j] == 0)
@@ -712,6 +714,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             }
             else if (choice == 2 && lifeline_skip == false)
             {
+                // if user select skip option then it will return and gets out of the function
                 lifeline_skip = true;
                 setColor(2);
                 cout << "The question is skipped successfully " << endl;// skip question
@@ -720,6 +723,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             }
             else if (choice == 3 && lifeline_replace_question == false)
             {
+                // it will again generate other questionn using rand()
                 lifeline_replace_question = true;
                 r = rand() % 10;// new question
                 setColor(11);
@@ -751,6 +755,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             }
             else if (choice == 5)
             {
+                // it will generate the same other question
                 setColor(3);
                 cout << " you selected not to choose any lifeline ";
                 cout << endl;
@@ -767,6 +772,7 @@ void Sciencequestions(int& highscore)   //easy level questions
             }
             else
             {
+                // if user not select yes option then it will generate the same question again
                 setColor(3);
                 cout << "You already used this lifeline " << endl;// lifeline already used
                 setColor(11);
@@ -833,10 +839,10 @@ void Sciencequestions(int& highscore)   //easy level questions
             highscore = highscore - 2;
             wrongAnswers++;
             cout << endl;
-            wrongIndex[wrongCount] = r;
-            wrongType[wrongCount] = 1;
-            wrongUserAns[wrongCount] = userans;
-            wrongCorrectAns[wrongCount] = answer[r];
+            wrongIndex[wrongCount] = r;  // it will store the index in wrongindex
+            wrongType[wrongCount] = 1;   // it will store the type of file in wrongtype
+            wrongUserAns[wrongCount] = userans;        // it will store the user asnwer
+            wrongCorrectAns[wrongCount] = answer[r];   // it store the correct the answer in array
             wrongCount++;
             system("pause");
             system("cls");
