@@ -126,15 +126,15 @@ void saveQuizLog(const char* playerName, int score)
     }
 }
 
-int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
+int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds) //to get input from user within a fixed time limit
 {
     time_t start = time(0);
-    string buffer;
+    string buffer; //temp for digits input by user
     cout << " (You have " << timeLimitSeconds << " seconds) " << flush;
     cout << endl;
     while (true)
     {
-        double elapsed = difftime(time(0), start);
+        double elapsed = difftime(time(0), start); //calculate how much time has passed
         if (elapsed >= timeLimitSeconds)
         {
 
@@ -148,9 +148,9 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
             cout << endl;
             return -1;
         }
-        if (_kbhit())
+        if (_kbhit()) //checks if a key has been pressed
         {
-            char ch = _getch();
+            char ch = _getch(); //reads the key without showing it
             if (ch == '\r' || ch == '\n')
             {
                 if (!buffer.empty())
@@ -174,13 +174,13 @@ int getTimedAnswer(int minOption, int maxOption, int timeLimitSeconds)
             {
                 if (!buffer.empty())
                 {
-                    buffer.pop_back();
+                    buffer.pop_back(); //removes last character from buffer
                     cout << "\b \b" << flush;
                 }
             }
             else if (ch >= '0' && ch <= '9')
             {
-                buffer.push_back(ch);
+                buffer.push_back(ch); //stores digit in buffer
                 cout << ch << flush;
             }
         }
